@@ -35,6 +35,8 @@ android {
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
+    implementation "io.insert-koin:koin-android:$versions.koin"
+
     implementation rootProject.modules.presentation
     implementation rootProject.modules.domain
     implementation rootProject.modules.data

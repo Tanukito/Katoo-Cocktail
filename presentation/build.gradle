@@ -30,6 +30,9 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    buildFeatures {
+        viewBinding true
+    }
 }
 
 dependencies {
@@ -39,6 +42,13 @@ dependencies {
     implementation "androidx.appcompat:appcompat:$versions.appcompat"
     implementation "com.google.android.material:material:$versions.material"
     implementation "androidx.constraintlayout:constraintlayout:$versions.constraintlayout"
+
+    implementation "androidx.navigation:navigation-fragment-ktx:$versions.navigation"
+    implementation "androidx.navigation:navigation-ui-ktx:$versions.navigation"
+
+    implementation "io.insert-koin:koin-android:$versions.koin"
+
+    implementation rootProject.modules.domain
 
     testImplementation "junit:junit:$testVersions.junit"
     androidTestImplementation "androidx.test.ext:junit:$testVersions.extJunit"
