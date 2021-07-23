@@ -4,12 +4,12 @@ plugins {
 }
 
 android {
-    compileSdkVersion 31
-    buildToolsVersion "30.0.3"
+    compileSdkVersion androidSdk.compile
+    buildToolsVersion androidSdk.build
 
     defaultConfig {
-        minSdkVersion 24
-        targetSdkVersion 31
+        minSdkVersion androidSdk.min
+        targetSdkVersion androidSdk.target
         versionCode 1
         versionName "1.0"
 
@@ -35,5 +35,5 @@ android {
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
-    testImplementation "junit:junit:$test_junit_version"
+    testImplementation "junit:junit:$testVersions.junit"
 }
