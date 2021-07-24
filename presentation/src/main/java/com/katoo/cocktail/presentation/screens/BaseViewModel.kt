@@ -9,7 +9,7 @@ abstract class BaseViewModel(
     private val coroutineJob: CompletableJob = SupervisorJob(),
     private val coroutineContext: CoroutineDispatcher = Dispatchers.IO,
     private val coroutineExceptionHandler: CoroutineExceptionHandler = CoroutineExceptionHandler { _, throwable ->
-        Log.d(TAG, throwable.toString())
+        Log.e(TAG, throwable.toString())
     }
 ) : ViewModel() {
     private var coroutineScope: CoroutineScope = initCoroutineScope()
