@@ -8,7 +8,7 @@ class IngredientsDataRepository(
     private val remoteDataSource: IngredientsRemoteDataSource
 ) : IngredientsRepository {
 
-    override fun getIngredients(): Result<List<Ingredient>> {
+    override suspend fun getIngredients(): Result<List<Ingredient>> {
         return remoteDataSource.getIngredients()
     }
 }

@@ -5,5 +5,5 @@ import com.katoo.cocktail.domain.result.Result
 
 interface IngredientsRepository {
 
-    fun getIngredients(): Result<List<Ingredient>>
+    suspend fun getIngredients(): Result<List<Ingredient>>
 }

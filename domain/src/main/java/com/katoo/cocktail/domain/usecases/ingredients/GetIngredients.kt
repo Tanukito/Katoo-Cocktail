@@ -9,7 +9,7 @@ class GetIngredients(
     private val repository: IngredientsRepository
 ) : BaseUseCase<Nothing, List<Ingredient>>() {
 
-    override fun doAction(params: Nothing?): Result<List<Ingredient>> {
+    override suspend fun doAction(params: Nothing?): Result<List<Ingredient>> {
         return repository.getIngredients()
     }
 }

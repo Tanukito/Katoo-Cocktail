@@ -11,7 +11,7 @@ class GetDrinksByIngredient(
     private val repository: DrinksRepository
 ) : BaseUseCase<Params, List<Drink>>() {
 
-    override fun doAction(params: Params?): Result<List<Drink>> {
+    override suspend fun doAction(params: Params?): Result<List<Drink>> {
         return params?.run {
             repository.getDrinksByIngredient(ingredient)
         }?: Result.Failure(Error.EmptyParams)
