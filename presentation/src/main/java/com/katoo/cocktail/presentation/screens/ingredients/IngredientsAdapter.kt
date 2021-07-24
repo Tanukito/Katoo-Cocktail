@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
+import coil.transform.CircleCropTransformation
 import com.katoo.cocktail.domain.models.Ingredient
 import com.katoo.cocktail.presentation.databinding.ViewIngredientBinding
 
@@ -32,6 +34,7 @@ class IngredientsAdapter : ListAdapter<Ingredient, IngredientsAdapter.Ingredient
 
         fun bind(ingredient: Ingredient) {
             binding.name.text = ingredient.name
+            binding.image.load(ingredient.imagePath)
         }
     }
 

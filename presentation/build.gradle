@@ -46,6 +46,8 @@ dependencies {
     implementation "androidx.navigation:navigation-fragment-ktx:$versions.navigation"
     implementation "androidx.navigation:navigation-ui-ktx:$versions.navigation"
 
+    implementation "io.coil-kt:coil:$versions.coil"
+
     implementation "io.insert-koin:koin-android:$versions.koin"
 
     implementation rootProject.modules.domain

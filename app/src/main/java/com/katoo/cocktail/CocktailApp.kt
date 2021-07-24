@@ -1,12 +1,14 @@
 package com.katoo.cocktail
 
 import android.app.Application
+import com.katoo.cocktail.data.di.dataModule
+import com.katoo.cocktail.domain.di.domainModule
 import com.katoo.cocktail.presentation.di.presentationModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
 
-class CocktailApp: Application() {
+class CocktailApp : Application() {
     override fun onCreate() {
         super.onCreate()
 
@@ -17,7 +19,7 @@ class CocktailApp: Application() {
         startKoin {
             androidLogger()
             androidContext(this@CocktailApp)
-            modules(presentationModule)
+            modules(presentationModule, domainModule, dataModule)
         }
     }
 }
