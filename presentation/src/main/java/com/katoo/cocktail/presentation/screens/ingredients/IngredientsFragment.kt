@@ -28,6 +28,10 @@ class IngredientsFragment : BaseFragment<FragmentIngredientsBinding, Ingredients
             setHasFixedSize(true)
             adapter = IngredientsAdapter()
         }
+
+        binding.emptyRetry.setOnClickListener {
+            viewModel.emptyRetryClicked()
+        }
     }
 
     override fun initViewModel() {

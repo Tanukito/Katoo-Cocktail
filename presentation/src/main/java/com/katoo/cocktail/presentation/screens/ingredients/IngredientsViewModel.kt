@@ -11,7 +11,7 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 
 class IngredientsViewModel(
-    getIngredients: GetIngredients,
+    private val getIngredients: GetIngredients,
     coroutineContext: CoroutineDispatcher = Dispatchers.IO
 ) : BaseViewModel(coroutineContext = coroutineContext) {
     private val ingredientsMLD = MutableLiveData<PresentationResult<List<Ingredient>>>()
@@ -19,6 +19,14 @@ class IngredientsViewModel(
         get() = ingredientsMLD
 
     init {
+        doGetIngredients()
+    }
+
+    fun emptyRetryClicked() {
+        doGetIngredients()
+    }
+
+    private fun doGetIngredients() {
         launch {
             ingredientsMLD.postValue(PresentationResult.Loading())
             val ingredients = getIngredients()
