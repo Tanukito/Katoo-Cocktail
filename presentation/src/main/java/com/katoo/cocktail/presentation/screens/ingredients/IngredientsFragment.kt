@@ -26,7 +26,7 @@ class IngredientsFragment : BaseFragment<FragmentIngredientsBinding, Ingredients
     override fun initViews() {
         binding.ingredients.run {
             setHasFixedSize(true)
-            adapter = IngredientsAdapter()
+            adapter = IngredientsAdapter(viewModel::ingredientClicked)
         }
 
         binding.emptyRetry.setOnClickListener {

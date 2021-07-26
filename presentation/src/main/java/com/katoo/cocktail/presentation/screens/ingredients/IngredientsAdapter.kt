@@ -6,11 +6,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import coil.transform.CircleCropTransformation
 import com.katoo.cocktail.domain.models.Ingredient
 import com.katoo.cocktail.presentation.databinding.ViewIngredientBinding
 
-class IngredientsAdapter : ListAdapter<Ingredient, IngredientsAdapter.IngredientsViewHolder>(
+class IngredientsAdapter(
+    private val ingredientClicked: (ingredient: Ingredient) -> Unit
+) : ListAdapter<Ingredient, IngredientsAdapter.IngredientsViewHolder>(
     IngredientsDiff()
 ) {
 
@@ -28,13 +29,17 @@ class IngredientsAdapter : ListAdapter<Ingredient, IngredientsAdapter.Ingredient
         holder.bind(getItem(position))
     }
 
-    class IngredientsViewHolder(
+    inner class IngredientsViewHolder(
         private val binding: ViewIngredientBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(ingredient: Ingredient) {
             binding.name.text = ingredient.name
             binding.image.load(ingredient.imagePath)
+
+            binding.root.setOnClickListener {
+                ingredientClicked(ingredient)
+            }
         }
     }
 
