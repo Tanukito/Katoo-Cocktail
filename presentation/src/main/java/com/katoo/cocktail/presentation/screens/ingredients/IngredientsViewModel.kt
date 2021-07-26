@@ -14,7 +14,7 @@ import kotlinx.coroutines.Dispatchers
 class IngredientsViewModel(
     private val getIngredients: GetIngredients,
     private val navigator: Navigator,
-    coroutineContext: CoroutineDispatcher = Dispatchers.IO
+    coroutineContext: CoroutineDispatcher
 ) : BaseViewModel(coroutineContext = coroutineContext) {
     private val ingredientsMLD = MutableLiveData<PresentationResult<List<Ingredient>>>()
     val ingredientsLD: LiveData<PresentationResult<List<Ingredient>>>
@@ -37,6 +37,6 @@ class IngredientsViewModel(
     }
 
     fun ingredientClicked(ingredient: Ingredient) {
-        navigator.goFromIngredientsToDrinks()
+        navigator.goFromIngredientsToDrinks(ingredient.name)
     }
 }

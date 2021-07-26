@@ -3,15 +3,16 @@ package com.katoo.cocktail.presentation.screens.ingredients
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.ListAdapter
-import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.katoo.cocktail.domain.models.Ingredient
 import com.katoo.cocktail.presentation.databinding.ViewIngredientBinding
+import com.katoo.cocktail.presentation.screens.BaseAdapter
+import com.katoo.cocktail.presentation.screens.BaseViewHolder
+import com.katoo.cocktail.presentation.screens.ingredients.IngredientsAdapter.IngredientsViewHolder
 
 class IngredientsAdapter(
     private val ingredientClicked: (ingredient: Ingredient) -> Unit
-) : ListAdapter<Ingredient, IngredientsAdapter.IngredientsViewHolder>(
+) : BaseAdapter<Ingredient, ViewIngredientBinding, IngredientsViewHolder>(
     IngredientsDiff()
 ) {
 
@@ -25,22 +26,16 @@ class IngredientsAdapter(
         )
     }
 
-    override fun onBindViewHolder(holder: IngredientsViewHolder, position: Int) {
-        holder.bind(getItem(position))
-    }
-
     inner class IngredientsViewHolder(
-        private val binding: ViewIngredientBinding
-    ) : RecyclerView.ViewHolder(binding.root) {
+        binding: ViewIngredientBinding
+    ) : BaseViewHolder<Ingredient, ViewIngredientBinding>(binding) {
 
-        fun bind(ingredient: Ingredient) {
-            binding.name.text = ingredient.name
-            binding.image.load(ingredient.imagePath)
-
+        override fun bind(item: Ingredient) {
+            binding.name.text = item.name
+            binding.image.load(item.imagePath)
             binding.root.setOnClickListener {
-                ingredientClicked(ingredient)
+                ingredientClicked(item)
             }
         }
     }
-
 }

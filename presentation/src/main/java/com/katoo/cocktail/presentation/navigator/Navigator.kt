@@ -6,7 +6,7 @@ class Navigator(
     navigatorLifecycle: NavigatorLifecycle
 ) : BaseNavigator(navigatorLifecycle) {
 
-    fun goFromIngredientsToDrinks() {
-        goTo(IngredientsFragmentDirections.actionIngredientsFragmentToDrinksFragment())
+    fun goFromIngredientsToDrinks(ingredient: String) {
+        goTo(IngredientsFragmentDirections.actionIngredientsFragmentToDrinksFragment(ingredient))
     }
 }

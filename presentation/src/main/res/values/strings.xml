@@ -1,4 +1,5 @@
 <resources>
     <string name="empty_ingredients">There are no ingredients</string>
+    <string name="empty_drinks">There are no drinks</string>
     <string name="retry">Retry</string>
 </resources>

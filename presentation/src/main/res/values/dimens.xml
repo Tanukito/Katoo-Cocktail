@@ -5,4 +5,7 @@
 
     <dimen name="ingredients_card_height">60dp</dimen>
     <dimen name="ingredients_card_corner_radius">@dimen/small</dimen>
+
+    <dimen name="drinks_card_height">200dp</dimen>
+    <dimen name="drinks_card_corner_radius">@dimen/small</dimen>
 </resources>
