@@ -8,6 +8,7 @@ import com.katoo.cocktail.domain.models.Drink
 import com.katoo.cocktail.presentation.databinding.ViewDrinkBinding
 import com.katoo.cocktail.presentation.screens.BaseAdapter
 import com.katoo.cocktail.presentation.screens.BaseViewHolder
+import com.katoo.cocktail.presentation.screens.diffs.DrinksDiff
 import com.katoo.cocktail.presentation.screens.drinks.DrinksAdapter.DrinksViewHolder
 
 class DrinksAdapter : BaseAdapter<Drink, ViewDrinkBinding, DrinksViewHolder>(

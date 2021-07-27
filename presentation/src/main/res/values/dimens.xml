@@ -2,6 +2,7 @@
 <resources>
     <dimen name="small">4dp</dimen>
     <dimen name="medium">8dp</dimen>
+    <dimen name="big">12dp</dimen>
 
     <dimen name="ingredients_card_height">60dp</dimen>
     <dimen name="ingredients_card_corner_radius">@dimen/small</dimen>

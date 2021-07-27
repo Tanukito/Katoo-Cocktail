@@ -33,6 +33,11 @@ class DrinksFragment : BaseFragment<FragmentDrinksBinding, DrinksViewModel>() {
             adapter = DrinksAdapter()
         }
 
+        binding.searchBar.setText(navArgs.ingredient)
+        binding.searchBar.setOnClickListener {
+            viewModel.searchBarClicked()
+        }
+
         binding.emptyState.emptyStateDescription.text =
             String.format(getString(R.string.empty_items), getString(R.string.drinks))
         binding.emptyState.emptyStateRetry.setOnClickListener {

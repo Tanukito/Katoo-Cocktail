@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.katoo.cocktail.domain.models.Drink
 import com.katoo.cocktail.domain.models.Ingredient
 import com.katoo.cocktail.domain.usecases.drinks.GetDrinksByIngredient
+import com.katoo.cocktail.presentation.navigator.Navigator
 import com.katoo.cocktail.presentation.result.PresentationResult
 import com.katoo.cocktail.presentation.result.toPresentationResult
 import com.katoo.cocktail.presentation.screens.BaseViewModel
@@ -14,6 +15,7 @@ import kotlinx.coroutines.Dispatchers
 class DrinksViewModel(
     private val ingredient: String,
     private val getDrinksByIngredient: GetDrinksByIngredient,
+    private val navigator: Navigator,
     coroutineContext: CoroutineDispatcher = Dispatchers.IO
 ) : BaseViewModel(coroutineContext = coroutineContext) {
     private val drinksMLD = MutableLiveData<PresentationResult<List<Drink>>>()
@@ -34,5 +36,9 @@ class DrinksViewModel(
             val ingredients = getDrinksByIngredient(GetDrinksByIngredient.Params(ingredient))
             drinksMLD.postValue(ingredients.toPresentationResult())
         }
+    }
+
+    fun searchBarClicked() {
+        navigator.goFromDrinksToSearch()
     }
 }

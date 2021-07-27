@@ -8,6 +8,7 @@ import com.katoo.cocktail.domain.models.Ingredient
 import com.katoo.cocktail.presentation.databinding.ViewIngredientBinding
 import com.katoo.cocktail.presentation.screens.BaseAdapter
 import com.katoo.cocktail.presentation.screens.BaseViewHolder
+import com.katoo.cocktail.presentation.screens.diffs.IngredientsDiff
 import com.katoo.cocktail.presentation.screens.ingredients.IngredientsAdapter.IngredientsViewHolder
 
 class IngredientsAdapter(
