@@ -2,7 +2,6 @@ package com.katoo.cocktail.presentation.screens.drinks
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.view.isVisible
 import androidx.navigation.fragment.navArgs
 import com.katoo.cocktail.domain.models.Drink
 import com.katoo.cocktail.presentation.R

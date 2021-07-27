@@ -2,7 +2,6 @@ package com.katoo.cocktail.presentation.screens.ingredients
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.view.isVisible
 import com.katoo.cocktail.domain.models.Ingredient
 import com.katoo.cocktail.presentation.R
 import com.katoo.cocktail.presentation.databinding.FragmentIngredientsBinding
