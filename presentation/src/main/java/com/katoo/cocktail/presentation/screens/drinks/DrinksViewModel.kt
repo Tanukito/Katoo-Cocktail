@@ -14,7 +14,7 @@ import kotlinx.coroutines.Dispatchers
 class DrinksViewModel(
     private val ingredient: String,
     private val getDrinksByIngredient: GetDrinksByIngredient,
-    coroutineContext: CoroutineDispatcher
+    coroutineContext: CoroutineDispatcher = Dispatchers.IO
 ) : BaseViewModel(coroutineContext = coroutineContext) {
     private val drinksMLD = MutableLiveData<PresentationResult<List<Drink>>>()
     val drinksLD: LiveData<PresentationResult<List<Drink>>>

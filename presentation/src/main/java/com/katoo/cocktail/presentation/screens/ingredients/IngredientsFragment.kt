@@ -4,7 +4,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import com.katoo.cocktail.domain.models.Ingredient
+import com.katoo.cocktail.presentation.R
 import com.katoo.cocktail.presentation.databinding.FragmentIngredientsBinding
+import com.katoo.cocktail.presentation.extensions.handleResult
 import com.katoo.cocktail.presentation.result.PresentationResult
 import com.katoo.cocktail.presentation.screens.BaseFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -12,9 +14,6 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class IngredientsFragment : BaseFragment<FragmentIngredientsBinding, IngredientsViewModel>() {
 
     override val viewModel: IngredientsViewModel by viewModel()
-
-    private val ingredientsAdapter: IngredientsAdapter
-        get() = binding.ingredients.adapter as IngredientsAdapter
 
     override fun initViewBinding(
         inflater: LayoutInflater,
@@ -29,7 +28,9 @@ class IngredientsFragment : BaseFragment<FragmentIngredientsBinding, Ingredients
             adapter = IngredientsAdapter(viewModel::ingredientClicked)
         }
 
-        binding.emptyRetry.setOnClickListener {
+        binding.emptyState.emptyStateDescription.text =
+            String.format(getString(R.string.empty_items), getString(R.string.ingredients))
+        binding.emptyState.emptyStateRetry.setOnClickListener {
             viewModel.emptyRetryClicked()
         }
     }
@@ -41,26 +42,10 @@ class IngredientsFragment : BaseFragment<FragmentIngredientsBinding, Ingredients
     }
 
     private fun handleIngredients(result: PresentationResult<List<Ingredient>>) {
-        when (result) {
-            is PresentationResult.Loading -> {
-                binding.ingredients.isVisible = false
-                binding.emptyGroup.isVisible = false
-                binding.loader.isVisible = true
-            }
-            is PresentationResult.Failure -> {
-                binding.ingredients.isVisible = false
-                binding.emptyGroup.isVisible = true
-                binding.loader.isVisible = false
-
-                ingredientsAdapter.submitList(emptyList())
-            }
-            is PresentationResult.Success -> {
-                binding.ingredients.isVisible = result.data.isNotEmpty()
-                binding.emptyGroup.isVisible = result.data.isEmpty()
-                binding.loader.isVisible = false
-
-                ingredientsAdapter.submitList(result.data)
-            }
-        }
+        binding.ingredients.handleResult(
+            binding.loader,
+            binding.emptyState.root,
+            result
+        )
     }
 }
