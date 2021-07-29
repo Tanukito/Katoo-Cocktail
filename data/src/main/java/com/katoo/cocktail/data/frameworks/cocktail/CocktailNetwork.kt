@@ -8,7 +8,8 @@ import com.katoo.cocktail.domain.models.Ingredient
 import com.katoo.cocktail.domain.result.Result
 
 class CocktailNetwork(
-    private val service: CocktailService
+    private val service: CocktailService,
+    private val generator: CocktailGenerator
 ) : BaseNetwork(), IngredientsRemoteDataSource, DrinksRemoteDataSource {
 
     override suspend fun getIngredients(): Result<List<Ingredient>> {
@@ -20,10 +21,7 @@ class CocktailNetwork(
                 ingredients.map { ingredient ->
                     Ingredient(
                         name = ingredient.strIngredient1,
-                        imagePath = CocktailConstants.imageIngredient.replace(
-                            CocktailConstants.imageIngredientParam,
-                            ingredient.strIngredient1
-                        )
+                        imagePath = generator.getIngredientImagePath(ingredient.strIngredient1)
                     )
                 }
             }

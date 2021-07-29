@@ -1,6 +1,7 @@
 package com.katoo.cocktail.data.di
 
 import com.katoo.cocktail.data.frameworks.cocktail.CocktailConstants
+import com.katoo.cocktail.data.frameworks.cocktail.CocktailGenerator
 import com.katoo.cocktail.data.frameworks.cocktail.CocktailNetwork
 import com.katoo.cocktail.data.frameworks.cocktail.CocktailService
 import com.katoo.cocktail.data.repositories.drinks.DrinksDataRepository
@@ -23,7 +24,7 @@ val dataModule = module {
     single<IngredientsRemoteDataSource> { get<CocktailNetwork>() }
     single<DrinksRemoteDataSource> { get<CocktailNetwork>() }
 
-    single { CocktailNetwork(service = get()) }
+    single { CocktailNetwork(service = get(), generator = get()) }
 
     single { get<Retrofit>().create(CocktailService::class.java) }
 
@@ -42,4 +43,6 @@ val dataModule = module {
             )
             .build()
     }
+    
+    single { CocktailGenerator() }
 }
