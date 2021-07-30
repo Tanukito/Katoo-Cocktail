@@ -1,14 +1,28 @@
 package com.katoo.cocktail.data.frameworks
 
 import com.katoo.cocktail.data.frameworks.cocktail.CocktailResponse
-import com.katoo.cocktail.domain.models.Error
+import com.katoo.cocktail.data.handlers.ConnectivityHandler
+import com.katoo.cocktail.data.mappers.toDomain
+import com.katoo.cocktail.domain.error.Error
 import com.katoo.cocktail.domain.result.Result
 import retrofit2.Response
-import java.net.UnknownHostException
 
-abstract class BaseNetwork {
+abstract class BaseNetwork(
+    private val connectivity: ConnectivityHandler
+) {
 
     suspend fun <ResponseType, Model> doCall(
+        request: suspend () -> Response<CocktailResponse<ResponseType>>,
+        map: (List<ResponseType>) -> Model
+    ): Result<Model> {
+        return if (!connectivity.isConnected()) {
+            Result.Failure(Error.NoConnection)
+        } else {
+            handleCall(request, map)
+        }
+    }
+
+    private suspend fun <ResponseType, Model> handleCall(
         request: suspend () -> Response<CocktailResponse<ResponseType>>,
         map: (List<ResponseType>) -> Model
     ): Result<Model> {
@@ -23,13 +37,7 @@ abstract class BaseNetwork {
                 Result.Failure(Error.Unknown)
             }
         } catch (e: Exception) {
-            Result.Failure(
-                if (e is UnknownHostException) {
-                    Error.UnknownHost
-                } else {
-                    Error.Unknown
-                }
-            )
+            Result.Failure(e.toDomain())
         }
     }
 }

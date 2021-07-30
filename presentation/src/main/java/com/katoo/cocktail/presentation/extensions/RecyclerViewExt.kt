@@ -1,8 +1,10 @@
 package com.katoo.cocktail.presentation.extensions
 
 import android.view.View
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
+import com.katoo.cocktail.presentation.mapper.toStringResId
 import com.katoo.cocktail.presentation.result.PresentationResult
 import com.katoo.cocktail.presentation.screens.BaseAdapter
 
@@ -22,11 +24,11 @@ fun <Model> RecyclerView.handleResult(
             emptyState.isVisible = true
             loader.isVisible = false
 
-            getBaseAdapter<Model>()?.submitList(emptyList())
+            Toast.makeText(context, result.error.toStringResId(), Toast.LENGTH_SHORT).show()
         }
         is PresentationResult.Success -> {
-            isVisible = result.data.isNotEmpty()
-            emptyState.isVisible = result.data.isEmpty()
+            isVisible = true
+            emptyState.isVisible = false
             loader.isVisible = false
 
             getBaseAdapter<Model>()?.submitList(result.data)

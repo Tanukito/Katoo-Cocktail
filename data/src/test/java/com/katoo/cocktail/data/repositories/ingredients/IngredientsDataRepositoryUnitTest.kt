@@ -1,7 +1,7 @@
 package com.katoo.cocktail.data.repositories.ingredients
 
 import com.katoo.cocktail.domain.models.Drink
-import com.katoo.cocktail.domain.models.Error
+import com.katoo.cocktail.domain.error.Error
 import com.katoo.cocktail.domain.models.Ingredient
 import com.katoo.cocktail.domain.result.Result
 import kotlinx.coroutines.runBlocking

@@ -1,7 +1,8 @@
 package com.katoo.cocktail.data.frameworks.cocktail
 
+import com.katoo.cocktail.data.handlers.ConnectivityHandler
 import com.katoo.cocktail.domain.models.Drink
-import com.katoo.cocktail.domain.models.Error
+import com.katoo.cocktail.domain.error.Error
 import com.katoo.cocktail.domain.models.Ingredient
 import com.katoo.cocktail.domain.result.Result
 import kotlinx.coroutines.runBlocking
@@ -25,6 +26,9 @@ class CocktailNetworkUnitTest {
     @Mock
     private lateinit var generator: CocktailGenerator
 
+    @Mock
+    private lateinit var connectivity: ConnectivityHandler
+
     private lateinit var network: CocktailNetwork
 
     private val responseBody: ResponseBody
@@ -32,12 +36,28 @@ class CocktailNetworkUnitTest {
 
     @Before
     fun setup() {
-        network = CocktailNetwork(service, generator)
+        network = CocktailNetwork(service, generator, connectivity)
+    }
+
+    @Test
+    fun `given connectivity returns there is no connection, when calling getIngredients function then returns no connection error`() {
+        runBlocking {
+            Mockito.`when`(connectivity.isConnected()).thenReturn(false)
+
+            val result = network.getIngredients()
+
+            Assert.assertEquals(
+                Result.Failure<Ingredient>(Error.NoConnection),
+                result
+            )
+        }
     }
 
     @Test
     fun `given service returns a list of ingredients, when calling getIngredients function then returns the ingredients`() {
         runBlocking {
+            Mockito.`when`(connectivity.isConnected()).thenReturn(true)
+            Mockito.`when`(generator.getIngredientImagePath(Mockito.anyString())).thenReturn("ip")
             Mockito.`when`(service.getIngredients()).thenReturn(
                 Response.success(
                     CocktailResponse(
@@ -47,9 +67,6 @@ class CocktailNetworkUnitTest {
                         )
                     )
                 )
-            )
-            Mockito.`when`(generator.getIngredientImagePath(Mockito.anyString())).thenReturn(
-                "ip"
             )
 
             val result = network.getIngredients()
@@ -69,6 +86,7 @@ class CocktailNetworkUnitTest {
     @Test
     fun `given service returns 500, when calling getIngredients function then returns unknown error`() {
         runBlocking {
+            Mockito.`when`(connectivity.isConnected()).thenReturn(true)
             Mockito.`when`(service.getIngredients()).thenReturn(
                 Response.error(500, responseBody)
             )
@@ -85,6 +103,7 @@ class CocktailNetworkUnitTest {
     @Test
     fun `given service returns a list of drinks, when calling getDrinksByIngredient function then returns the drinks`() {
         runBlocking {
+            Mockito.`when`(connectivity.isConnected()).thenReturn(true)
             Mockito.`when`(service.getDrinksByIngredient(Mockito.anyString())).thenReturn(
                 Response.success(
                     CocktailResponse(
@@ -113,6 +132,7 @@ class CocktailNetworkUnitTest {
     @Test
     fun `given service returns 500, when calling getDrinksByIngredient function then returns unknown error`() {
         runBlocking {
+            Mockito.`when`(connectivity.isConnected()).thenReturn(true)
             Mockito.`when`(service.getDrinksByIngredient(Mockito.anyString())).thenReturn(
                 Response.error(500, responseBody)
             )

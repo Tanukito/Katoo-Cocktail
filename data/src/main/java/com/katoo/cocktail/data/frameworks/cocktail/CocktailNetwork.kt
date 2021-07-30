@@ -1,6 +1,8 @@
 package com.katoo.cocktail.data.frameworks.cocktail
 
 import com.katoo.cocktail.data.frameworks.BaseNetwork
+import com.katoo.cocktail.data.handlers.ConnectivityHandler
+import com.katoo.cocktail.data.mappers.toDomain
 import com.katoo.cocktail.data.repositories.drinks.DrinksRemoteDataSource
 import com.katoo.cocktail.data.repositories.ingredients.IngredientsRemoteDataSource
 import com.katoo.cocktail.domain.models.Drink
@@ -9,8 +11,9 @@ import com.katoo.cocktail.domain.result.Result
 
 class CocktailNetwork(
     private val service: CocktailService,
-    private val generator: CocktailGenerator
-) : BaseNetwork(), IngredientsRemoteDataSource, DrinksRemoteDataSource {
+    private val generator: CocktailGenerator,
+    connectivity: ConnectivityHandler
+) : BaseNetwork(connectivity), IngredientsRemoteDataSource, DrinksRemoteDataSource {
 
     override suspend fun getIngredients(): Result<List<Ingredient>> {
         return doCall(
@@ -19,10 +22,7 @@ class CocktailNetwork(
             },
             map = { ingredients ->
                 ingredients.map { ingredient ->
-                    Ingredient(
-                        name = ingredient.strIngredient1,
-                        imagePath = generator.getIngredientImagePath(ingredient.strIngredient1)
-                    )
+                    ingredient.toDomain(generator)
                 }
             }
         )
@@ -35,11 +35,7 @@ class CocktailNetwork(
             },
             map = { drinks ->
                 drinks.map { drink ->
-                    Drink(
-                        id = drink.idDrink,
-                        description = drink.strDrink,
-                        imagePath = drink.strDrinkThumb
-                    )
+                    drink.toDomain()
                 }
             }
         )

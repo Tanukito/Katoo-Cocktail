@@ -1,7 +1,7 @@
-package com.katoo.cocktail.domain.models
+package com.katoo.cocktail.domain.error
 
 sealed class Error {
-    object EmptyParams: Error()
+    object NoConnection: Error()
     object UnknownHost: Error()
     object EmptyBody: Error()
     object Unknown: Error()

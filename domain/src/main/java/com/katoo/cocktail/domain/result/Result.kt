@@ -1,6 +1,6 @@
 package com.katoo.cocktail.domain.result
 
-import com.katoo.cocktail.domain.models.Error
+import com.katoo.cocktail.domain.error.Error
 
 sealed class Result<out Model> {
     data class Failure<out Model>(val error: Error) : Result<Model>()

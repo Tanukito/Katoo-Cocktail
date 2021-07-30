@@ -1,15 +1,14 @@
 package com.katoo.cocktail.presentation.screens
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
-import com.katoo.cocktail.domain.constants.TAG
+import com.katoo.cocktail.domain.logcat.Logcat
 import kotlinx.coroutines.*
 
 abstract class BaseViewModel(
     private val coroutineJob: CompletableJob = SupervisorJob(),
     private val coroutineContext: CoroutineDispatcher = Dispatchers.IO,
     private val coroutineExceptionHandler: CoroutineExceptionHandler = CoroutineExceptionHandler { _, throwable ->
-        Log.e(TAG, throwable.toString())
+        Logcat.d(throwable.toString())
     }
 ) : ViewModel() {
     private var coroutineScope: CoroutineScope = initCoroutineScope()

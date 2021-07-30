@@ -6,9 +6,9 @@ import com.katoo.cocktail.domain.models.Ingredient
 import com.katoo.cocktail.domain.result.Result
 import com.katoo.cocktail.domain.usecases.ingredients.FilterIngredients
 import com.katoo.cocktail.domain.usecases.ingredients.GetIngredients
+import com.katoo.cocktail.presentation.mapper.toPresentation
 import com.katoo.cocktail.presentation.navigator.Navigator
 import com.katoo.cocktail.presentation.result.PresentationResult
-import com.katoo.cocktail.presentation.result.toPresentationResult
 import com.katoo.cocktail.presentation.screens.BaseViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -23,7 +23,7 @@ class SearchViewModel(
     val ingredientsLD: LiveData<PresentationResult<List<Ingredient>>>
         get() = ingredientsMLD
 
-    private var ingredients: List<Ingredient> = emptyList()
+    private lateinit var result: Result<List<Ingredient>>
 
     init {
         doGetIngredients()
@@ -36,23 +36,19 @@ class SearchViewModel(
     private fun doGetIngredients() {
         launch {
             ingredientsMLD.postValue(PresentationResult.Loading())
-            val ingredientsResult = getIngredients()
-            ingredients = ingredientsResult.toIngredients()
-            ingredientsMLD.postValue(ingredientsResult.toPresentationResult())
-        }
-    }
-
-    private fun Result<List<Ingredient>>.toIngredients(): List<Ingredient> {
-        return when (this) {
-            is Result.Failure -> emptyList()
-            is Result.Success -> data
+            result = getIngredients(GetIngredients.Params())
+            ingredientsMLD.postValue(result.toPresentation())
         }
     }
 
     fun searchChanged(text: String) {
-        launch {
-            val result = filterIngredients(FilterIngredients.Params(text, ingredients))
-            ingredientsMLD.postValue(result.toPresentationResult())
+        if (::result.isInitialized) {
+            (result as? Result.Success)?.data?.let { ingredients ->
+                launch {
+                    val result = filterIngredients(FilterIngredients.Params(text, ingredients))
+                    ingredientsMLD.postValue(result.toPresentation())
+                }
+            }
         }
     }
 

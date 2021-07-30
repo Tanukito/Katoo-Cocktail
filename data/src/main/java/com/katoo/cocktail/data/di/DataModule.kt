@@ -4,6 +4,7 @@ import com.katoo.cocktail.data.frameworks.cocktail.CocktailConstants
 import com.katoo.cocktail.data.frameworks.cocktail.CocktailGenerator
 import com.katoo.cocktail.data.frameworks.cocktail.CocktailNetwork
 import com.katoo.cocktail.data.frameworks.cocktail.CocktailService
+import com.katoo.cocktail.data.handlers.ConnectivityHandler
 import com.katoo.cocktail.data.repositories.drinks.DrinksDataRepository
 import com.katoo.cocktail.data.repositories.drinks.DrinksRemoteDataSource
 import com.katoo.cocktail.data.repositories.ingredients.IngredientsDataRepository
@@ -12,6 +13,7 @@ import com.katoo.cocktail.domain.repositories.DrinksRepository
 import com.katoo.cocktail.domain.repositories.IngredientsRepository
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -24,7 +26,7 @@ val dataModule = module {
     single<IngredientsRemoteDataSource> { get<CocktailNetwork>() }
     single<DrinksRemoteDataSource> { get<CocktailNetwork>() }
 
-    single { CocktailNetwork(service = get(), generator = get()) }
+    single { CocktailNetwork(service = get(), generator = get(), connectivity = get()) }
 
     single { get<Retrofit>().create(CocktailService::class.java) }
 
@@ -43,6 +45,8 @@ val dataModule = module {
             )
             .build()
     }
-    
+
     single { CocktailGenerator() }
+
+    single { ConnectivityHandler(context = androidContext()) }
 }

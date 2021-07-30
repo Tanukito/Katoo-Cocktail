@@ -8,6 +8,7 @@ import androidx.core.widget.addTextChangedListener
 import com.katoo.cocktail.domain.models.Ingredient
 import com.katoo.cocktail.presentation.R
 import com.katoo.cocktail.presentation.databinding.FragmentSearchBinding
+import com.katoo.cocktail.presentation.extensions.handleResult
 import com.katoo.cocktail.presentation.extensions.hideKeyboard
 import com.katoo.cocktail.presentation.extensions.showKeyboard
 import com.katoo.cocktail.presentation.result.PresentationResult
@@ -65,26 +66,10 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>() {
     }
 
     private fun handleIngredients(result: PresentationResult<List<Ingredient>>) {
-        when (result) {
-            is PresentationResult.Loading -> {
-                binding.ingredients.isVisible = false
-                binding.emptyState.root.isVisible = false
-                binding.loader.isVisible = true
-            }
-            is PresentationResult.Failure -> {
-                binding.ingredients.isVisible = false
-                binding.emptyState.root.isVisible = true
-                binding.loader.isVisible = false
-
-                searchAdapter.submitList(emptyList())
-            }
-            is PresentationResult.Success -> {
-                binding.ingredients.isVisible = true
-                binding.emptyState.root.isVisible = false
-                binding.loader.isVisible = false
-
-                searchAdapter.submitList(result.data)
-            }
-        }
+        binding.ingredients.handleResult(
+            binding.loader,
+            binding.emptyState.root,
+            result
+        )
     }
 }

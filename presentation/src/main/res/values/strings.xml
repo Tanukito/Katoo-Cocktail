@@ -3,4 +3,9 @@
     <string name="ingredients">ingredients</string>
     <string name="drinks">drinks</string>
     <string name="retry">Retry</string>
+
+    <string name="no_connection_error">There is no internet connection. Please, review the connections</string>
+    <string name="unknown_host_error">The host is unreachable. Please, review the connections</string>
+    <string name="empty_body_error">There is no response</string>
+    <string name="unknown_error">An error has occurred. Please, try layer</string>
 </resources>

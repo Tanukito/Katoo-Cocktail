@@ -1,7 +1,7 @@
 package com.katoo.cocktail.domain.usecases.drinks
 
 import com.katoo.cocktail.domain.models.Drink
-import com.katoo.cocktail.domain.models.Error
+import com.katoo.cocktail.domain.error.Error
 import com.katoo.cocktail.domain.repositories.DrinksRepository
 import com.katoo.cocktail.domain.result.Result
 import com.katoo.cocktail.domain.usecases.BaseUseCase
@@ -11,10 +11,8 @@ class GetDrinksByIngredient(
     private val repository: DrinksRepository
 ) : BaseUseCase<Params, List<Drink>>() {
 
-    override suspend fun doAction(params: Params?): Result<List<Drink>> {
-        return params?.run {
-            repository.getDrinksByIngredient(ingredient)
-        }?: Result.Failure(Error.EmptyParams)
+    override suspend fun doAction(params: Params): Result<List<Drink>> {
+        return repository.getDrinksByIngredient(params.ingredient)
     }
 
     data class Params(val ingredient: String)
