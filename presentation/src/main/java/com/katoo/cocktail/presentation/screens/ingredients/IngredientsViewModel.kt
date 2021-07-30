@@ -3,7 +3,6 @@ package com.katoo.cocktail.presentation.screens.ingredients
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.katoo.cocktail.domain.models.Ingredient
-import com.katoo.cocktail.domain.result.Result
 import com.katoo.cocktail.domain.usecases.ingredients.GetIngredients
 import com.katoo.cocktail.presentation.mapper.toPresentation
 import com.katoo.cocktail.presentation.navigator.Navigator

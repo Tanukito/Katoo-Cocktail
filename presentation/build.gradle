@@ -52,6 +52,11 @@ dependencies {
     implementation rootProject.modules.domain
 
     testImplementation "junit:junit:$testVersions.junit"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$testVersions.coroutines"
+    testImplementation "org.mockito:mockito-core:$testVersions.mockitoCore"
+    testImplementation "org.mockito:mockito-inline:$testVersions.mockitoInline"
+    testImplementation "androidx.arch.core:core-testing:$testVersions.archCore"
+
     androidTestImplementation "androidx.test.ext:junit:$testVersions.extJunit"
     androidTestImplementation "androidx.test.espresso:espresso-core:$testVersions.espressoCore"
 }
