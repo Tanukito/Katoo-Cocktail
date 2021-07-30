@@ -9,25 +9,25 @@
     app:layout_constraintTop_toTopOf="parent">
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/empty_state_image"
+        android:id="@+id/error_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_warning"
-        android:tint="@color/yellow"
-        app:layout_constraintBottom_toTopOf="@+id/empty_state_description"
+        android:src="@drawable/ic_error"
+        android:tint="@color/red"
+        app:layout_constraintBottom_toTopOf="@+id/error_retry"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/empty_state_description"
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/error_retry"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/empty_items"
+        android:text="@string/retry"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/empty_state_image" />
+        app:layout_constraintTop_toBottomOf="@+id/error_image" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

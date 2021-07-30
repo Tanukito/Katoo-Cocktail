@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import com.katoo.cocktail.domain.models.Ingredient
 import com.katoo.cocktail.presentation.R
 import com.katoo.cocktail.presentation.databinding.FragmentIngredientsBinding
-import com.katoo.cocktail.presentation.extensions.handleResult
+import com.katoo.cocktail.presentation.extensions.handleListView
 import com.katoo.cocktail.presentation.result.PresentationResult
 import com.katoo.cocktail.presentation.screens.BaseFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -22,15 +22,16 @@ class IngredientsFragment : BaseFragment<FragmentIngredientsBinding, Ingredients
     }
 
     override fun initViews() {
+        binding.emptyState.emptyStateDescription.text =
+            String.format(getString(R.string.empty_items), getString(R.string.ingredients))
+
+        binding.error.errorRetry.setOnClickListener {
+            viewModel.emptyRetryClicked()
+        }
+
         binding.ingredients.run {
             setHasFixedSize(true)
             adapter = IngredientsAdapter(viewModel::ingredientClicked)
-        }
-
-        binding.emptyState.emptyStateDescription.text =
-            String.format(getString(R.string.empty_items), getString(R.string.ingredients))
-        binding.emptyState.emptyStateRetry.setOnClickListener {
-            viewModel.emptyRetryClicked()
         }
     }
 
@@ -41,10 +42,12 @@ class IngredientsFragment : BaseFragment<FragmentIngredientsBinding, Ingredients
     }
 
     private fun handleIngredients(result: PresentationResult<List<Ingredient>>) {
-        binding.ingredients.handleResult(
+        result.handleListView(
+            requireContext(),
             binding.loader,
+            binding.error.root,
             binding.emptyState.root,
-            result
+            binding.ingredients
         )
     }
 }

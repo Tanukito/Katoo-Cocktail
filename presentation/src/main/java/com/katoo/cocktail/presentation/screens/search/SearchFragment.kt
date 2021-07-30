@@ -3,12 +3,11 @@ package com.katoo.cocktail.presentation.screens.search
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
-import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import com.katoo.cocktail.domain.models.Ingredient
 import com.katoo.cocktail.presentation.R
 import com.katoo.cocktail.presentation.databinding.FragmentSearchBinding
-import com.katoo.cocktail.presentation.extensions.handleResult
+import com.katoo.cocktail.presentation.extensions.handleListView
 import com.katoo.cocktail.presentation.extensions.hideKeyboard
 import com.katoo.cocktail.presentation.extensions.showKeyboard
 import com.katoo.cocktail.presentation.result.PresentationResult
@@ -47,15 +46,16 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>() {
         }
         binding.searchBar.showKeyboard()
 
+        binding.emptyState.emptyStateDescription.text =
+            String.format(getString(R.string.empty_items), getString(R.string.ingredients))
+
+        binding.error.errorRetry.setOnClickListener {
+            viewModel.emptyRetryClicked()
+        }
+
         binding.ingredients.run {
             setHasFixedSize(true)
             adapter = SearchAdapter(viewModel::ingredientClicked)
-        }
-
-        binding.emptyState.emptyStateDescription.text =
-            String.format(getString(R.string.empty_items), getString(R.string.ingredients))
-        binding.emptyState.emptyStateRetry.setOnClickListener {
-            viewModel.emptyRetryClicked()
         }
     }
 
@@ -66,10 +66,12 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>() {
     }
 
     private fun handleIngredients(result: PresentationResult<List<Ingredient>>) {
-        binding.ingredients.handleResult(
+        result.handleListView(
+            requireContext(),
             binding.loader,
+            binding.error.root,
             binding.emptyState.root,
-            result
+            binding.ingredients
         )
     }
 }

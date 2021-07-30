@@ -24,7 +24,13 @@
         android:id="@+id/empty_state"
         layout="@layout/view_empty_state"
         android:visibility="gone"
-        tools:visibility="visible"/>
+        tools:visibility="visible" />
+
+    <include
+        android:id="@+id/error"
+        layout="@layout/view_error"
+        android:visibility="gone"
+        tools:visibility="visible" />
 
     <ProgressBar
         android:id="@+id/loader"

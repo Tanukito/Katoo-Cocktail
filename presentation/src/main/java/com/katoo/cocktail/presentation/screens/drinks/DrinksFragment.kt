@@ -6,7 +6,7 @@ import androidx.navigation.fragment.navArgs
 import com.katoo.cocktail.domain.models.Drink
 import com.katoo.cocktail.presentation.R
 import com.katoo.cocktail.presentation.databinding.FragmentDrinksBinding
-import com.katoo.cocktail.presentation.extensions.handleResult
+import com.katoo.cocktail.presentation.extensions.handleListView
 import com.katoo.cocktail.presentation.result.PresentationResult
 import com.katoo.cocktail.presentation.screens.BaseFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -28,11 +28,6 @@ class DrinksFragment : BaseFragment<FragmentDrinksBinding, DrinksViewModel>() {
     }
 
     override fun initViews() {
-        binding.drinks.run {
-            setHasFixedSize(true)
-            adapter = DrinksAdapter()
-        }
-
         binding.searchBar.setText(navArgs.ingredient)
         binding.searchBar.setOnClickListener {
             viewModel.searchBarClicked()
@@ -40,8 +35,14 @@ class DrinksFragment : BaseFragment<FragmentDrinksBinding, DrinksViewModel>() {
 
         binding.emptyState.emptyStateDescription.text =
             String.format(getString(R.string.empty_items), getString(R.string.drinks))
-        binding.emptyState.emptyStateRetry.setOnClickListener {
+
+        binding.error.errorRetry.setOnClickListener {
             viewModel.emptyRetryClicked()
+        }
+
+        binding.drinks.run {
+            setHasFixedSize(true)
+            adapter = DrinksAdapter()
         }
     }
 
@@ -52,10 +53,12 @@ class DrinksFragment : BaseFragment<FragmentDrinksBinding, DrinksViewModel>() {
     }
 
     private fun handleIngredients(result: PresentationResult<List<Drink>>) {
-        binding.drinks.handleResult(
+        result.handleListView(
+            requireContext(),
             binding.loader,
+            binding.error.root,
             binding.emptyState.root,
-            result
+            binding.drinks
         )
     }
 }

@@ -49,6 +49,12 @@
             android:visibility="gone"
             tools:visibility="visible" />
 
+        <include
+            android:id="@+id/error"
+            layout="@layout/view_error"
+            android:visibility="gone"
+            tools:visibility="visible" />
+
         <ProgressBar
             android:id="@+id/loader"
             android:layout_width="wrap_content"
