@@ -2,12 +2,9 @@ package com.katoo.cocktail.domain.drinks
 
 import com.katoo.cocktail.domain.error.Error
 import com.katoo.cocktail.domain.models.Drink
-import com.katoo.cocktail.domain.models.Ingredient
 import com.katoo.cocktail.domain.repositories.DrinksRepository
-import com.katoo.cocktail.domain.repositories.IngredientsRepository
 import com.katoo.cocktail.domain.result.Result
 import com.katoo.cocktail.domain.usecases.drinks.GetDrinksByIngredient
-import com.katoo.cocktail.domain.usecases.ingredients.GetIngredients
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert
 import org.junit.Before

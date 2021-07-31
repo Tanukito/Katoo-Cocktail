@@ -19,9 +19,6 @@ class SearchFragment : BaseFragment<FragmentSearchBinding, SearchViewModel>() {
 
     override val viewModel: SearchViewModel by viewModel()
 
-    private val searchAdapter: SearchAdapter
-        get() = binding.ingredients.adapter as SearchAdapter
-
     override fun initViewBinding(
         inflater: LayoutInflater,
         container: ViewGroup?

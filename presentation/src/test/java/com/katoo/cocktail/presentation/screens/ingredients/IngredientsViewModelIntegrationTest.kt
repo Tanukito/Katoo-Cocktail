@@ -7,7 +7,6 @@ import com.katoo.cocktail.domain.models.Ingredient
 import com.katoo.cocktail.domain.repositories.IngredientsRepository
 import com.katoo.cocktail.domain.result.Result
 import com.katoo.cocktail.domain.usecases.ingredients.GetIngredients
-import com.katoo.cocktail.presentation.anyGetIngredientsParams
 import com.katoo.cocktail.presentation.navigator.Navigator
 import com.katoo.cocktail.presentation.result.PresentationResult
 import kotlinx.coroutines.Dispatchers
