@@ -2,10 +2,9 @@ package com.katoo.cocktail.presentation.screens.drinks
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.katoo.cocktail.domain.error.Error
 import com.katoo.cocktail.domain.models.Drink
 import com.katoo.cocktail.domain.usecases.drinks.GetDrinksByIngredient
-import com.katoo.cocktail.presentation.mapper.toPresentation
+import com.katoo.cocktail.presentation.mappers.toPresentation
 import com.katoo.cocktail.presentation.navigator.Navigator
 import com.katoo.cocktail.presentation.result.PresentationResult
 import com.katoo.cocktail.presentation.screens.BaseViewModel

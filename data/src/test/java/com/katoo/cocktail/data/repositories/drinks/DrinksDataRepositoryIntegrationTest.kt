@@ -1,6 +1,6 @@
 package com.katoo.cocktail.data.repositories.drinks
 
-import com.katoo.cocktail.data.frameworks.cocktail.*
+import com.katoo.cocktail.data.networks.cocktail.*
 import com.katoo.cocktail.data.handlers.ConnectivityHandler
 import com.katoo.cocktail.domain.error.Error
 import com.katoo.cocktail.domain.models.Drink

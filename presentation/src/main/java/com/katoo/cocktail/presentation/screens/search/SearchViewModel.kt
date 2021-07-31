@@ -6,7 +6,7 @@ import com.katoo.cocktail.domain.models.Ingredient
 import com.katoo.cocktail.domain.result.Result
 import com.katoo.cocktail.domain.usecases.ingredients.FilterIngredients
 import com.katoo.cocktail.domain.usecases.ingredients.GetIngredients
-import com.katoo.cocktail.presentation.mapper.toPresentation
+import com.katoo.cocktail.presentation.mappers.toPresentation
 import com.katoo.cocktail.presentation.navigator.Navigator
 import com.katoo.cocktail.presentation.result.PresentationResult
 import com.katoo.cocktail.presentation.screens.BaseViewModel

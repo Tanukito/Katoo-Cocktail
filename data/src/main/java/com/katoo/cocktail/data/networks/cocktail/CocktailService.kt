@@ -1,4 +1,4 @@
-package com.katoo.cocktail.data.frameworks.cocktail
+package com.katoo.cocktail.data.networks.cocktail
 
 import retrofit2.Response
 import retrofit2.http.GET

@@ -1,6 +1,6 @@
-package com.katoo.cocktail.data.frameworks
+package com.katoo.cocktail.data.networks
 
-import com.katoo.cocktail.data.frameworks.cocktail.CocktailResponse
+import com.katoo.cocktail.data.networks.cocktail.CocktailResponse
 import com.katoo.cocktail.data.handlers.ConnectivityHandler
 import com.katoo.cocktail.data.mappers.toDomain
 import com.katoo.cocktail.domain.error.Error

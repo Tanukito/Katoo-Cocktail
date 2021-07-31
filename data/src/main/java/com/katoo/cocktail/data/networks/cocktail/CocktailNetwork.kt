@@ -1,6 +1,6 @@
-package com.katoo.cocktail.data.frameworks.cocktail
+package com.katoo.cocktail.data.networks.cocktail
 
-import com.katoo.cocktail.data.frameworks.BaseNetwork
+import com.katoo.cocktail.data.networks.BaseNetwork
 import com.katoo.cocktail.data.handlers.ConnectivityHandler
 import com.katoo.cocktail.data.mappers.toDomain
 import com.katoo.cocktail.data.repositories.drinks.DrinksRemoteDataSource
@@ -21,9 +21,7 @@ class CocktailNetwork(
                 service.getIngredients()
             },
             map = { ingredients ->
-                ingredients.map { ingredient ->
-                    ingredient.toDomain(generator)
-                }
+                ingredients.toDomain(generator)
             }
         )
     }
@@ -34,9 +32,7 @@ class CocktailNetwork(
                 service.getDrinksByIngredient(ingredient)
             },
             map = { drinks ->
-                drinks.map { drink ->
-                    drink.toDomain()
-                }
+                drinks.toDomain()
             }
         )
     }

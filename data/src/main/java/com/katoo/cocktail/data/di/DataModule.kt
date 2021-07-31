@@ -1,9 +1,9 @@
 package com.katoo.cocktail.data.di
 
-import com.katoo.cocktail.data.frameworks.cocktail.CocktailConstants
-import com.katoo.cocktail.data.frameworks.cocktail.CocktailGenerator
-import com.katoo.cocktail.data.frameworks.cocktail.CocktailNetwork
-import com.katoo.cocktail.data.frameworks.cocktail.CocktailService
+import com.katoo.cocktail.data.networks.cocktail.CocktailConstants
+import com.katoo.cocktail.data.networks.cocktail.CocktailGenerator
+import com.katoo.cocktail.data.networks.cocktail.CocktailNetwork
+import com.katoo.cocktail.data.networks.cocktail.CocktailService
 import com.katoo.cocktail.data.handlers.ConnectivityHandler
 import com.katoo.cocktail.data.repositories.drinks.DrinksDataRepository
 import com.katoo.cocktail.data.repositories.drinks.DrinksRemoteDataSource

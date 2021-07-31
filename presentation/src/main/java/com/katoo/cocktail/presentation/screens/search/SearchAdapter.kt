@@ -7,7 +7,7 @@ import com.katoo.cocktail.domain.models.Ingredient
 import com.katoo.cocktail.presentation.databinding.ViewSearchBinding
 import com.katoo.cocktail.presentation.screens.BaseAdapter
 import com.katoo.cocktail.presentation.screens.BaseViewHolder
-import com.katoo.cocktail.presentation.screens.diffs.IngredientsDiff
+import com.katoo.cocktail.presentation.diffs.IngredientsDiff
 import com.katoo.cocktail.presentation.screens.search.SearchAdapter.SearchViewHolder
 
 class SearchAdapter(

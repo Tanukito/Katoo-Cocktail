@@ -5,7 +5,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
-import com.katoo.cocktail.presentation.mapper.toStringResId
+import com.katoo.cocktail.presentation.mappers.toStringResId
 import com.katoo.cocktail.presentation.result.PresentationResult
 
 fun <Model> PresentationResult<List<Model>>.handleListView(

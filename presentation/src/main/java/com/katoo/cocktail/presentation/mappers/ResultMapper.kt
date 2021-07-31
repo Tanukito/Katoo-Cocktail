@@ -1,4 +1,4 @@
-package com.katoo.cocktail.presentation.mapper
+package com.katoo.cocktail.presentation.mappers
 
 import com.katoo.cocktail.domain.result.Result
 import com.katoo.cocktail.presentation.result.PresentationResult

@@ -1,4 +1,4 @@
-package com.katoo.cocktail.presentation.screens.diffs
+package com.katoo.cocktail.presentation.diffs
 
 import androidx.recyclerview.widget.DiffUtil
 import com.katoo.cocktail.domain.models.Ingredient

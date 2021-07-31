@@ -1,4 +1,4 @@
-package com.katoo.cocktail.data.frameworks.cocktail
+package com.katoo.cocktail.data.networks.cocktail
 
 object CocktailConstants {
     const val baseUrl = "https://www.thecocktaildb.com/api/json/v1/1/"
